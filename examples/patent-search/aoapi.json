@@ -1,0 +1,68 @@
+{
+  "aoapi_version": "0.1",
+  "service": {
+    "name": "Example Patent Portal",
+    "base_url": "https://example.com"
+  },
+  "discovery": {
+    "well_known": "/.well-known/aoapi.json"
+  },
+  "actions": [
+    {
+      "name": "search_patent",
+      "description": "Search patents by keywords/assignee/inventor and return normalized results.",
+      "method": "POST",
+      "path": "/aoapi/actions/search_patent",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "assignee": {
+            "type": "string"
+          },
+          "inventor": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "integer",
+            "default": 10,
+            "minimum": 1,
+            "maximum": 50
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "results": {
+            "type": "array"
+          },
+          "receipt": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "results",
+          "receipt"
+        ]
+      },
+      "verification": {
+        "mode": "shadow_ui",
+        "ui_proof": {
+          "type": "dom_digest",
+          "selector": "#results",
+          "hash_alg": "sha256"
+        },
+        "receipt_sig": {
+          "alg": "ed25519",
+          "kid": "portal-key-2026-01"
+        }
+      }
+    }
+  ]
+}

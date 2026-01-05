@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AOAPI Descriptor",
+  "type": "object",
+  "required": ["aoapi_version", "actions"],
+  "properties": {
+    "aoapi_version": {
+      "type": "string",
+      "description": "AOAPI protocol version",
+      "const": "0.1"
+    },
+    "service": {
+      "type": "object",
+      "properties": {
+        "name": {"type": "string"},
+        "base_url": {"type": "string", "format": "uri"}
+      }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "method", "path", "input_schema"],
+        "properties": {
+          "name": {"type": "string"},
+          "description": {"type": "string"},
+          "method": {"type": "string", "enum": ["GET", "POST", "PUT", "DELETE"]},
+          "path": {"type": "string"},
+          "input_schema": {"type": "object"},
+          "output_schema": {"type": "object"},
+          "verification": {
+            "type": "object",
+            "properties": {
+              "mode": {"type": "string", "enum": ["shadow_ui", "signature_only"]},
+              "receipt_sig": {
+                "type": "object",
+                "properties": {
+                  "alg": {"type": "string", "enum": ["ed25519"]},
+                  "kid": {"type": "string"}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -172,7 +172,7 @@ Vertical-specific adapters and verification strategies released separately.
 **Monica King, J.D.**
 Founder, Coherence Protocol
 
-[LinkedIn] | [email]
+www.linkedin.com/in/monicaking | monica@coherenceprotocol.co
 
 ---
 
